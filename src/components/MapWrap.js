@@ -8,6 +8,8 @@ const LOCATION = {
   lng: 0,
 };
 const ALL_MAPS = [
+  'Esri.WorldImagery',
+  'NASAGIBS.ViirsEarthAtNight2012',
   'Stadia.AlidadeSmoothDark',
   'OpenStreetMap.Mapnik',
   'OpenStreetMap.DE',
@@ -203,7 +205,7 @@ const MapWrap = (props) => {
 
   const mapSettings = {
     center: CENTER,
-    defaultBaseMap: 'Stadia.AlidadeSmoothDark',
+    defaultBaseMap: 'Esri.WorldImagery',
     zoom: DEFAULT_ZOOM,
     mapEffect,
   };

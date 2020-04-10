@@ -18,5 +18,15 @@ export const mapServices = [
     name: 'OpenSeaMap',
     attribution: 'Map data: &copy; <a href="http://www.openseamap.org">OpenSeaMap</a> contributors',
     url: 'https://tiles.openseamap.org/seamark/{z}/{x}/{y}.png'
+  },
+  {
+    name: 'NASAGIBS.ViirsEarthAtNight2012',
+    attribution: 'Imagery by  (GIBS), (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.',
+    url: 'https://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default//GoogleMapsCompatible_Level8/{z}/{y}/{x}.jpg'
+  },
+  {
+    name: 'Esri.WorldImagery',
+    attribution: 'Tiles &copy; Esri Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+    url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
   }
 ];
