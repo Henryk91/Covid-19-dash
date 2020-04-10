@@ -1,4 +1,5 @@
 export function layerCreator(L) {
+  if(!L.TileLayer)return 
   L.TileLayer.Provider = L.TileLayer.extend({
     initialize: function(arg, options) {
       var providers = L.TileLayer.Provider.providers;

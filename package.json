@@ -14,6 +14,7 @@
     "gatsby-remark-vega": "^0.2.6",
     "gatsby-source-filesystem": "^2.1.55",
     "gatsby-transformer-remark": "^2.7.1",
+    "gh-pages": "^2.2.0",
     "leaflet": "^1.6.0",
     "node-sass": "^4.13.1",
     "path": "^0.12.7",
@@ -52,14 +53,17 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby build --prefix-paths",
     "clean": "gatsby clean",
     "develop": "gatsby develop",
     "format": "prettier-eslint --eslint-config-path ./config/eslint.config.js --write '**/*.js'",
     "lint": "eslint -c ./config/eslint.config.js . --ext .js",
     "start": "yarn develop",
     "serve": "gatsby serve",
-    "test": "jest --config ./config/jest.config.js"
+    "test": "jest --config ./config/jest.config.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "deploy:github": "npm run build && node ./scripts/deploy-github"
   },
   "husky": {
     "hooks": {

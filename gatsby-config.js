@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: '/Covid-19-dash',
   plugins: [
     'gatsby-plugin-resolve-src',
     'gatsby-plugin-sass',
@@ -27,6 +28,7 @@ module.exports = {
           `gatsby-remark-vega`,
         ],
       },
-    }
+    },
+    
   ]
 };

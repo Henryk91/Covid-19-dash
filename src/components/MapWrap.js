@@ -98,6 +98,7 @@ const CENTER = [LOCATION.lat, LOCATION.lng];
 const DEFAULT_ZOOM = 2;
 
 const MapWrap = (props) => {
+  let L = require('leaflet')
   L = layerCreator(L);
 
   /**
