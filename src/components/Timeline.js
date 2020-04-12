@@ -1,6 +1,6 @@
 import React from 'react';
 import { VegaLite } from 'react-vega';
-import { getTimeData } from '../services/index'
+import { getTimeData, getHistoricalTimeData } from '../services/index'
 import { TimeChart } from './vega/spec1'
 
 export default class TimelineChart extends React.Component {
@@ -10,21 +10,36 @@ export default class TimelineChart extends React.Component {
       timeData: null,
       data: {myData: []},
       spec: TimeChart,
-      selectedFilter: 'cases'
+      selectedFilter: 'cases',
+      historical: null
     };
   }
 
   componentDidMount() {
-    getTimeData(done => {
-      this.setState({ data: { myData: [...done.data]}, timeData: {data: done.data} });
+    getHistoricalTimeData(done => {
+      this.setState({ historical: {data: done.data} });
         this.filterChart('cases');
     });
+    // getTimeData(done => {
+      // this.setState({ data: { myData: [...done.data]}, timeData: {data: done.data} });
+      //   this.timeDataFilterChart'cases');
+    // });
   }
 
   filterChart(name){
+    let { historical } = this.state;
+    if(!historical) return
+    let days = historical.data.map(day => {
+      return {
+        date: new Date(day.date),
+        count: day[name]
+      }
+    });
+    this.setState({ data: { myData: [...days] } , selectedFilter: name});
+  }
+  timeDataFilterChart(name){
     let { timeData } = this.state;
     if(!timeData) return
-
     let days = timeData.data.map((day) => day = new Date(day.date).toDateString());
     days = days.filter((v, i, a) => a.findIndex(val => val === v) === i);
 

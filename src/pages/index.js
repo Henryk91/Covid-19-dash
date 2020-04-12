@@ -16,6 +16,13 @@ class IndexPage extends Component {
     getCountries(done => {
       this.setState({ countries: done });
     });
+    const time = 1000 * 60 * 10; // Update every 10 minute;
+    setInterval(() => {
+      console.log('Calling new data.', new Date());
+      getCountries(done => {
+        this.setState({ countries: done });
+      });
+    },time);
   }
 }
 
