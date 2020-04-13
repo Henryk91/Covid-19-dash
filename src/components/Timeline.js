@@ -1,6 +1,6 @@
 import React from 'react';
 import { VegaLite } from 'react-vega';
-import { getTimeData, getHistoricalTimeData } from '../services/index'
+import { getTimeData, getHistoricalTimeData, logUse } from '../services/index'
 import { TimeChart } from './vega/spec1'
 
 export default class TimelineChart extends React.Component {
@@ -13,6 +13,8 @@ export default class TimelineChart extends React.Component {
       selectedFilter: 'cases',
       historical: null
     };
+
+    logUse();
   }
 
   componentDidMount() {

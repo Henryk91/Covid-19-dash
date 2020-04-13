@@ -52,4 +52,13 @@ export function getHistoricalTimeData(next) {
         next(error);
       });
   }
+export function logUse() {
+    fetch('https://henryk91-note.herokuapp.com/api/log')
+      .then((res) =>  {
+        console.log('Welcome to my site.');  
+      })
+      .catch((error) => {
+        console.log('Error:', error);
+      });
+  }
 
