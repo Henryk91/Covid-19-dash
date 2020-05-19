@@ -8,6 +8,7 @@ const RightInfo = (props) => {
 
   const createDList = (data) => {
     if (!data) return;
+    data = data.sort(deathSort);
     let ret = data.map((country) => {
       return (
         <div className="right-list-item" key={country.deaths + ' ' + country.country}>
@@ -20,6 +21,28 @@ const RightInfo = (props) => {
     });
     return ret;
   };
+
+  const deathSort = (a, b) => {
+      // a should come before b in the sorted order
+      if(a.deaths > b.deaths){
+        return -1;
+      }else if(a.deaths < b.deaths){
+        return 1;
+      }else{
+        return 0;
+      }
+    }
+  const recSort = (a, b) => {
+      // a should come before b in the sorted order
+      if(a.recovered > b.recovered){
+        return -1;
+      }else if(a.recovered < b.recovered){
+        return 1;
+      }else{
+        return 0;
+      }
+    }
+
   const countDeaths = (data) => {
     if (!data) return;
     let total = 0;
@@ -38,6 +61,7 @@ const RightInfo = (props) => {
   };
 
   const createRList = (data) => {
+    data = data.sort(recSort)
     let ret = data.map((country) => {
       return (
         <div className="right-list-item" key={country.recovered + ' ' + country.country}>

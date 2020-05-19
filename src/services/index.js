@@ -37,8 +37,7 @@ function processHistoriaclData(data){
     }
     
   })
-  // console.log('parsed',parsed);
-  // console.log('data',data);
+
   return {data: parsed};
 }
 export function getHistoricalTimeData(next) {

@@ -27,6 +27,7 @@ export default class HomePage extends React.Component {
   }
 
   countryCount(data){
+    console.log('data',data);
     let c = data.map(item => item = item.country);
     c = c.filter((v, i, a) => a.findIndex(val => val === v) === i);
     return c.length;

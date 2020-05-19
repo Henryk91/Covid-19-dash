@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import HomePage from '../components/Home';
-import { getCountries } from '../services/index'
+import { getCountries, logUse } from '../services/index'
 class IndexPage extends Component {
   render() {
     const { countries } = this.state;
@@ -13,6 +13,7 @@ class IndexPage extends Component {
   };
 
   componentDidMount() {
+    logUse();
     getCountries(done => {
       this.setState({ countries: done });
     });

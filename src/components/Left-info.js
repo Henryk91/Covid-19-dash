@@ -10,6 +10,7 @@ export default class LeftInfo extends React.Component {
     };
     this.countCases = this.countCases.bind(this)
     this.createList = this.createList.bind(this)
+    this.countSort = this.countSort.bind(this)
   }
 
   countCases(data) {
@@ -21,8 +22,20 @@ export default class LeftInfo extends React.Component {
     return total
   }
 
+  countSort = (a, b) => {
+    // a should come before b in the sorted order
+    if(a.cases > b.cases){
+      return -1;
+    }else if(a.cases < b.cases){
+      return 1;
+    }else{
+      return 0;
+    }
+  }
+
   createList = (data) => {
     if(!data) return;
+    data = data.sort(this.countSort)
     let ret = data.map((country) => {
       return (
         <div className="left-list-item" key={ country.cases + ' ' + country.country}>
