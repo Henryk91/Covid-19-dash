@@ -1,5 +1,5 @@
 export function getCountries(next) {
-    fetch('https://henryk91-note.herokuapp.com/api/dash-data/countries')
+    fetch('https://note.henryk.co.za/api/dash-data/countries')
       .then((res) =>  res.json())
       .then((data) => {
         next(data)
@@ -10,7 +10,7 @@ export function getCountries(next) {
       });
   }
 export function getTimeData(next) {
-    fetch('https://henryk91-note.herokuapp.com/api/dash-data/map-data')
+    fetch('https://note.henryk.co.za/api/dash-data/map-data')
       .then((res) =>  res.json())
       .then((data) => {
         next(data)
