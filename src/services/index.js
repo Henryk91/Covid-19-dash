@@ -41,7 +41,7 @@ function processHistoriaclData(data){
   return {data: parsed};
 }
 export function getHistoricalTimeData(next) {
-    fetch('https://henryk91-note.herokuapp.com/api/dash-data/historical')
+    fetch('https://note.henryk.co.za/api/dash-data/historical')
       .then((res) =>  res.json())
       .then((data) => {
         next(processHistoriaclData(data))
@@ -52,7 +52,7 @@ export function getHistoricalTimeData(next) {
       });
   }
 export function logUse() {
-    fetch('https://henryk91-note.herokuapp.com/api/log')
+    fetch('https://note.henryk.co.za/api/log')
       .then((res) =>  {
         console.log('Welcome to my site.');  
       })
