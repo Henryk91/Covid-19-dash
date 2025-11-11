@@ -1,37 +1,36 @@
 {
-  "name": "gatsby-starter-leaflet",
-  "description": "A Gatsby starter with Leafet!",
-  "version": "0.2.2",
-  "author": "Colby Fayock <hello@colbyfayock.com>",
+  "name": "covid-19-dash",
+  "description": "Dashboard showing world covid 19 data",
+  "version": "2.0.0",
+  "author": "Henry K",
   "dependencies": {
     "axios": "^0.19.2",
     "d3": "^5.15.1",
-    "gatsby": "^2.19.43",
-    "gatsby-plugin-react-helmet": "^3.1.23",
-    "gatsby-plugin-react-leaflet": "2.0.12",
-    "gatsby-plugin-resolve-src": "^2.0.0",
-    "gatsby-plugin-sass": "^2.1.30",
+    "gatsby": "^5.15.0",
+    "gatsby-plugin-react-helmet": "^6.15.0",
+    "gatsby-plugin-sass": "^6.15.0",
     "gatsby-remark-vega": "^0.2.6",
-    "gatsby-source-filesystem": "^2.1.55",
-    "gatsby-transformer-remark": "^2.7.1",
+    "gatsby-source-filesystem": "^5.15.0",
+    "gatsby-transformer-remark": "^6.15.0",
     "gh-pages": "^2.2.0",
-    "leaflet": "^1.6.0",
-    "node-sass": "^4.13.1",
-    "path": "^0.12.7",
+    "leaflet": "^1.9.4",
     "prop-types": "^15.7.2",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-helmet": "^5.2.0",
-    "react-leaflet": "^2.6.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
+    "react-leaflet": "^4.2.1",
     "react-vega": "^7.3.0",
     "rehype-react": "^5.0.1",
-    "vega": "^5.10.1",
-    "vega-lite": "^4.10.1"
+    "sass": "^1.72.0",
+    "vega": "^5.25.0",
+    "vega-lite": "^5.20.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.5",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^25.1.0",
-    "babel-preset-gatsby": "^0.2.35",
+    "babel-preset-gatsby": "^3.15.0",
+    "core-js": "^3.46.0",
     "enzyme": "^3.11.0",
     "eslint": "^6.8.0",
     "eslint-config-zurgbot": "^0.0.6",
@@ -55,7 +54,7 @@
   "scripts": {
     "build": "gatsby build --prefix-paths",
     "clean": "gatsby clean",
-    "develop": "gatsby develop",
+    "develop": "gatsby develop -p 3000",
     "format": "prettier-eslint --eslint-config-path ./config/eslint.config.js --write '**/*.js'",
     "lint": "eslint -c ./config/eslint.config.js . --ext .js",
     "start": "yarn develop",
@@ -78,9 +77,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/colbyfayock/gatsby-starter-leaflet"
+    "url": "https://github.com/Henryk91/Covid-19-dash"
   },
-  "bugs": {
-    "url": "https://github.com/colbyfayock/gatsby-starter-leaflet/issues"
+  "engines": {
+    "node": ">=18"
   }
 }

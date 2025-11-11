@@ -2,8 +2,8 @@
  * @see https://github.com/PaulLeCam/react-leaflet/blob/master/__mocks__/leaflet.js
  */
 
-const L = require.requireActual( 'leaflet' );
-const LeafletMock = jest.genMockFromModule( 'leaflet' );
+const L = jest.requireActual( 'leaflet' );
+const LeafletMock = jest.createMockFromModule( 'leaflet' );
 
 class ControlMock extends LeafletMock.Control {
   constructor( options ) {
@@ -75,11 +75,7 @@ class MapMock extends LeafletMock.Map {
     if ( options.maxBounds ) {
       this.setMaxBounds( options.maxBounds );
     }
-    console.log( 'asdfasdf' );
-
     if ( options.center && options.zoom !== undefined ) {
-      console.log( 'options.center', options.center );
-      console.log( 'options.zoom', options.zoom );
       this.setView( L.latLng( options.center ), options.zoom );
     }
   }

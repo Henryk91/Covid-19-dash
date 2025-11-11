@@ -1,9 +1,9 @@
-import L from 'leaflet';
-
 import { isDomAvailable } from 'lib/util';
 
 const useConfigureLeaflet = () => {
   if ( !isDomAvailable()) return;
+
+  const L = require( 'leaflet' );
 
   // To get around an issue with the default icon not being set up right between using React
   // and importing the leaflet library, we need to reset the image imports

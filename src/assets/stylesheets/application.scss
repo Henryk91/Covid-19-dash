@@ -1,7 +1,8 @@
-@import "settings/__settings";
-@import "util/__util";
-@import "components/__components";
-@import "pages/__pages";
+@use "settings/__settings";
+@use "util/__util";
+@use "components/__components";
+@use "pages/__pages";
+@use "settings/fonts";
 
 * {
   box-sizing: border-box;
@@ -11,7 +12,7 @@ header{
   margin-bottom: 10px;
 }
 body {
-  font-family: $font-default;
+  font-family: fonts.$font-default;
   padding: 0;
   margin: 0;
 }

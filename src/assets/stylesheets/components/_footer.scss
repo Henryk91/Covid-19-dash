@@ -1,11 +1,13 @@
+@use '../settings/colors' as colors;
+
 footer {
 
   width: 100%;
   height: 2em;
   line-height: 2em;
-  color: $white;
+  color: colors.$white;
   text-align: center;
-  background-color: $blue-grey-700;
+  background-color: colors.$blue-grey-700;
 
   p {
     font-size: 1em;

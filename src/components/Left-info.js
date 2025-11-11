@@ -1,46 +1,44 @@
-import React, {Component} from 'react';
-// import ExpandSvg from './Expand-svg';
-
+import React from 'react';
 export default class LeftInfo extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor( props ) {
+    super( props );
     this.state = {
       totalCases: 0,
-      countries: props && props.length > 0 ?  props : null
+      countries: props && props.length > 0 ? props : null
     };
-    this.countCases = this.countCases.bind(this)
-    this.createList = this.createList.bind(this)
-    this.countSort = this.countSort.bind(this)
+    this.countCases = this.countCases.bind( this );
+    this.createList = this.createList.bind( this );
+    this.countSort = this.countSort.bind( this );
   }
 
-  countCases(data) {
-    if(!data) return
+  countCases( data ) {
+    if ( !data ) return;
     let total = 0;
-    data.forEach((country) => {
+    data.forEach(( country ) => {
       total += country.cases;
     });
-    return total
+    return total;
   }
 
-  countSort = (a, b) => {
+  countSort = ( a, b ) => {
     // a should come before b in the sorted order
-    if(a.cases > b.cases){
+    if ( a.cases > b.cases ) {
       return -1;
-    }else if(a.cases < b.cases){
+    } else if ( a.cases < b.cases ) {
       return 1;
-    }else{
+    } else {
       return 0;
     }
-  }
+  };
 
-  createList = (data) => {
-    if(!data) return;
-    data = data.sort(this.countSort)
-    let ret = data.map((country) => {
+  createList = ( data ) => {
+    if ( !data ) return;
+    data = data.sort( this.countSort );
+    let ret = data.map(( country ) => {
       return (
-        <div className="left-list-item" key={ country.cases + ' ' + country.country}>
-          <p className="color-red">{Number(country.cases).toLocaleString()} </p>
-          <p>{country.country}</p>
+        <div className="left-list-item" key={country.cases + ' ' + country.country}>
+          <p className="color-red">{ Number( country.cases ).toLocaleString() } </p>
+          <p>{ country.country }</p>
         </div>
       );
     });
@@ -48,35 +46,34 @@ export default class LeftInfo extends React.Component {
   };
 
   render() {
-    
     const { countries } = this.props;
-    const totalCases = this.countCases(countries);
+    const totalCases = this.countCases( countries );
 
-    const list = this.createList(countries);
-    const lastUpdated = countries && countries[0] ? new Date(countries[0].updated).toLocaleString() : null;
+    const list = this.createList( countries );
+    const lastUpdated = countries && countries[0] ? new Date( countries[0].updated ).toLocaleString() : null;
     return (
       <div className="left-container">
         <div className="left-list-total grey-border">
           <h3>Total Confirmed</h3>
-          <h1 className="big-number">{Number(totalCases).toLocaleString()}</h1>
+          <h1 className="big-number">{ Number( totalCases ).toLocaleString() }</h1>
         </div>
         <div className="grey-border list-parent1">
           <div className="left-list-title">
-             {/* <ExpandSvg /> */} 
+            { /* <ExpandSvg /> */ }
             <p>Confirmed Cases by</p>
             <p>Country/Region/Sovereignty</p>
           </div>
-          <div className="left-list-container">{list}</div>
+          <div className="left-list-container">{ list }</div>
         </div>
         <div className="list-toggle">
-          {/* <div className="grey-border filter-button selected">V1</div>
+          { /* <div className="grey-border filter-button selected">V1</div>
           <div className="grey-border filter-button">V2</div>
-          <div className="grey-border filter-button">V3</div> */}
+          <div className="grey-border filter-button">V3</div> */ }
         </div>
         <div className="grey-border left-list-footer">
           <p id="last-date-title">Last Updated at (D/M/YYYY)</p>
           <p className="bold" id="last-date">
-            {lastUpdated}
+            { lastUpdated }
           </p>
         </div>
       </div>

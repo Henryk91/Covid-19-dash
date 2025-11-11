@@ -1,9 +1,11 @@
+@use '../settings/colors' as colors;
+
 header {
   margin-top: 10px;
   margin-left: 10px;
   margin-right: 10px;
   width: calc(100% - 20px);
-  color: $white;
+  color: colors.$white;
   background-color: black;
   .container {
     display: flex;
@@ -23,7 +25,7 @@ header {
 
   a {
     display: block;
-    color: lighten($gatsby-purple, 50);
+    color: rebeccapurple;
     text-decoration: none;
     padding: 0 0.5em;
   }

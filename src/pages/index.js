@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import HomePage from '../components/Home';
-import { getCountries, logUse } from '../services/index'
+import { getCountries, logUse } from '../services/index';
 class IndexPage extends Component {
   render() {
     const { countries } = this.state;
-    return <div>{countries ? <HomePage countries={countries} /> : <p>Loading</p>}</div>;
+    return <div>{ countries ? <HomePage countries={countries} /> : <p>Loading</p> }</div>;
   }
 
   state = {
@@ -14,16 +14,16 @@ class IndexPage extends Component {
 
   componentDidMount() {
     logUse();
-    getCountries(done => {
+    getCountries(( done ) => {
       this.setState({ countries: done });
     });
     const time = 1000 * 60 * 10; // Update every 10 minute;
     setInterval(() => {
-      console.log('Calling new data.', new Date());
-      getCountries(done => {
+      console.log( 'Calling new data.', new Date());
+      getCountries(( done ) => {
         this.setState({ countries: done });
       });
-    },time);
+    }, time );
   }
 }
 

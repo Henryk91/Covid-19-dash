@@ -1,34 +1,46 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Map as BaseMap, TileLayer, ZoomControl } from 'react-leaflet';
-import { useConfigureLeaflet, useMapServices, useRefEffect } from 'hooks';
+import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet';
+import { useConfigureLeaflet, useMapServices } from 'hooks';
 import { isDomAvailable } from 'lib/util';
 // import ExpandSvg from './Expand-svg';
 
-const Map = (props) => {
+const Map = ( props ) => {
   const { children, className, defaultBaseMap, mapEffect, ...rest } = props;
 
   const mapRef = useRef();
 
   useConfigureLeaflet();
 
-  useRefEffect({
-    ref: mapRef,
-    effect: mapEffect,
-  });
+  const handleMapCreate = useCallback(
+    ( mapInstance ) => {
+      mapRef.current = mapInstance;
+      if ( typeof mapEffect === 'function' ) {
+        mapEffect({ leafletElement: mapInstance, map: mapInstance });
+      }
+    },
+    [mapEffect]
+  );
+
+  useEffect(() => {
+    if ( typeof mapEffect !== 'function' ) return;
+    if ( !mapRef.current ) return;
+
+    mapEffect({ leafletElement: mapRef.current, map: mapRef.current });
+  }, [mapEffect]);
 
   const services = useMapServices({
-    names: [defaultBaseMap],
+    names: [defaultBaseMap]
   });
-  const basemap = services.find((service) => service.name === defaultBaseMap);
+  const basemap = services.find(( service ) => service.name === defaultBaseMap );
 
   let mapClassName = `map grey-border`;
 
-  if (className) {
+  if ( className ) {
     mapClassName = `${mapClassName} ${className}`;
   }
 
-  if (!isDomAvailable()) {
+  if ( !isDomAvailable()) {
     return (
       <div className={mapClassName}>
         <p className="map-loading">Loading map...</p>
@@ -39,17 +51,17 @@ const Map = (props) => {
   const mapSettings = {
     className: 'map-base',
     zoomControl: false,
-    ...rest,
+    whenCreated: handleMapCreate,
+    ...rest
   };
 
   return (
     <div className={mapClassName}>
-      {/* <ExpandSvg /> */}
-      <BaseMap ref={mapRef} {...mapSettings}>
-        {children}
-        {basemap && <TileLayer {...basemap} />}
+      <MapContainer ref={mapRef} {...mapSettings}>
+        { children }
+        { basemap && <TileLayer {...basemap} /> }
         <ZoomControl position="bottomright" />
-      </BaseMap>
+      </MapContainer>
     </div>
   );
 };
@@ -58,7 +70,7 @@ Map.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   defaultBaseMap: PropTypes.string,
-  mapEffect: PropTypes.func,
+  mapEffect: PropTypes.func
 };
 
 export default Map;

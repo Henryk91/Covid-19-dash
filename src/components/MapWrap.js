@@ -1,11 +1,10 @@
-import React from 'react';
-import L from 'leaflet';
+import React, { useCallback } from 'react';
 import Map from 'components/Map';
 import { layerCreator } from '../data/leaflet-providers';
 
 const LOCATION = {
   lat: 0,
-  lng: 0,
+  lng: 0
 };
 const ALL_MAPS = [
   'Esri.WorldImagery',
@@ -94,76 +93,79 @@ const ALL_MAPS = [
   'OneMapSG.Night',
   'OneMapSG.Original',
   'OneMapSG.Grey',
-  'OneMapSG.LandLot',
+  'OneMapSG.LandLot'
 ];
 const CENTER = [LOCATION.lat, LOCATION.lng];
 const DEFAULT_ZOOM = 2;
 
-const MapWrap = (props) => {
-  let L = require('leaflet')
-  L = layerCreator(L);
-
+const MapWrap = ({ countries, filter }) => {
   /**
    * mapEffect
    * @description Fires a callback once the page renders
    * @example Here this is and example of being used to zoom in and set a popup on load
    */
 
-  async function mapEffect({ leafletElement: map } = {}) {
-    let reuseMap = false;
-    map.eachLayer(function(layer) {
-      if (layer._url) {
-      } else {
-        reuseMap = true;
-        layer.remove();
-      }
-    });
+  const mapEffect = useCallback(
+    async ({ map } = {}) => {
+      if ( !map ) return;
+      if ( typeof window === 'undefined' ) return;
 
-    let response = props.countries;
-    const data = response;
-    const hasData = Array.isArray(data) && data.length > 0;
+      const leaflet = require( 'leaflet' );
+      const L = layerCreator( leaflet );
 
-    if (!hasData) return;
-
-    const geoJson = {
-      type: 'FeatureCollection',
-      features: data.map((country = {}) => {
-        const { countryInfo = {} } = country;
-        const { lat, long: lng } = countryInfo;
-        return {
-          type: 'Feature',
-          properties: {
-            ...country,
-          },
-          geometry: {
-            type: 'Point',
-            coordinates: [lng, lat],
-          },
-        };
-      }),
-    };
-    const geoJsonLayers = new L.GeoJSON(geoJson, {
-      pointToLayer: (feature = {}, latlng) => {
-        const { properties = {} } = feature;
-        let updatedFormatted;
-        let casesString;
-
-        const { country, updated, todayCases, active, cases, deaths, recovered } = properties;
-        const flag = properties.countryInfo.flag;
-        if (props.filter === 'active') {
-          casesString = `${active}`;
+      let reuseMap = false;
+      map.eachLayer( function( layer ) {
+        if ( layer._url ) {
         } else {
-          casesString = `${cases}`;
+          reuseMap = true;
+          layer.remove();
         }
-        if (cases > 1000) {
-          casesString = `${casesString.slice(0, -3)}k+`;
-        }
+      });
 
-        if (updated) {
-          updatedFormatted = new Date(updated).toLocaleString();
-        }
+      const data = countries;
+      const hasData = Array.isArray( data ) && data.length > 0;
 
-        const html = `
+      if ( !hasData ) return;
+
+      const geoJson = {
+        type: 'FeatureCollection',
+        features: data.map(( country = {}) => {
+          const { countryInfo = {} } = country;
+          const { lat, long: lng } = countryInfo;
+          return {
+            type: 'Feature',
+            properties: {
+              ...country
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [lng, lat]
+            }
+          };
+        })
+      };
+      const geoJsonLayers = new L.GeoJSON( geoJson, {
+        pointToLayer: ( feature = {}, latlng ) => {
+          const { properties = {} } = feature;
+          let updatedFormatted;
+          let casesString;
+
+          const { country, updated, todayCases, active, cases, deaths, recovered } = properties;
+          const flag = properties.countryInfo.flag;
+          if ( filter === 'active' ) {
+            casesString = `${active}`;
+          } else {
+            casesString = `${cases}`;
+          }
+          if ( cases > 1000 ) {
+            casesString = `${casesString.slice( 0, -3 )}k+`;
+          }
+
+          if ( updated ) {
+            updatedFormatted = new Date( updated ).toLocaleString();
+          }
+
+          const html = `
           <span class="icon-marker">
             <span class="icon-marker-tooltip">
               <img style="width: 100%;" src=${flag} />
@@ -181,33 +183,35 @@ const MapWrap = (props) => {
           </span>
         `;
 
-        return L.marker(latlng, {
-          icon: L.divIcon({
-            className: 'icon',
-            html,
-          }),
-          riseOnHover: true,
-        });
-      },
-    });
-
-    geoJsonLayers.addTo(map);
-
-    let arrObj = {};
-    if (!reuseMap) {
-      ALL_MAPS.forEach((key) => {
-        arrObj[key] = L.tileLayer.provider(key);
+          return L.marker( latlng, {
+            icon: L.divIcon({
+              className: 'icon',
+              html
+            }),
+            riseOnHover: true
+          });
+        }
       });
-    }
 
-    if (!reuseMap) L.control.layers(arrObj).addTo(map);
-  }
+      geoJsonLayers.addTo( map );
+
+      let arrObj = {};
+      if ( !reuseMap ) {
+        ALL_MAPS.forEach(( key ) => {
+          arrObj[key] = L.tileLayer.provider( key );
+        });
+      }
+
+      if ( !reuseMap ) L.control.layers( arrObj ).addTo( map );
+    },
+    [countries, filter]
+  );
 
   const mapSettings = {
     center: CENTER,
     defaultBaseMap: 'Esri.WorldImagery',
     zoom: DEFAULT_ZOOM,
-    mapEffect,
+    mapEffect
   };
 
   return (
