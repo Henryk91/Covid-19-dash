@@ -54,7 +54,7 @@ export const logUse = () => {
   if ( currentURL.includes( 'localhost' )) return;
   const hasLoggedUse = sessionStorage.getItem( 'hasLoggedUse' );
   if ( !hasLoggedUse ) {
-    fetch( 'https://note.henryk.co.za/api/log' )
+    fetch( 'https://note.henryk.co.za/api/log?site=covid-19-dash' )
       .then(( res ) => res.json())
       .then(( data ) => {
         console.log( data );
