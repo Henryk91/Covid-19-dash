@@ -142,12 +142,11 @@ export default class TimelineChart extends React.Component {
 
   render() {
     const { data, spec, hasLoadedHistorical } = this.state;
-    const hasData = data && Array.isArray( data.myData ) && data.myData.length > 0;
     const emptyMessage = hasLoadedHistorical ? 'No chart data available' : 'Loading chart...';
     return (
       <div id="chart-box">
         <div id="chart-inner-box">
-          { hasData ? <VegaLite data={data} spec={spec} /> : <p className="map-loading">{ emptyMessage }</p> }
+          { data?.myData?.length ? <VegaLite data={data} spec={spec} /> : <p className="map-loading">{ emptyMessage }</p> }
           <div className="map-toggle">
             <button
               type="button"

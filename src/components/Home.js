@@ -44,11 +44,7 @@ export default class HomePage extends React.Component {
         <div className="main-container">
           <LeftInfo countries={data} />
           <div id="home-wrapper">
-            { selectedFilter === 'active' ? (
-              <MapWrap countries={data} filter={'active'} />
-            ) : (
-              <MapWrap countries={data} filter={'all'} />
-            ) }
+            <MapWrap countries={data} filter={selectedFilter === 'active'? 'active' : 'all'} />
 
             <div className="map-toggle">
               <button

@@ -10,7 +10,7 @@ export function layerCreator( L ) {
       var variantName = parts[1];
 
       if ( !providers[providerName]) {
-        throw 'No such provider (' + providerName + ')';
+        throw new Error( 'No such provider (' + providerName + ')' );
       }
 
       var provider = {
@@ -21,7 +21,7 @@ export function layerCreator( L ) {
       // overwrite values in provider from variant.
       if ( variantName && 'variants' in providers[providerName]) {
         if ( !( variantName in providers[providerName].variants )) {
-          throw 'No such variant of ' + providerName + ' (' + variantName + ')';
+          throw new Error( 'No such variant of ' + providerName + ' (' + variantName + ')' );
         }
         var variant = providers[providerName].variants[variantName];
         var variantOptions;
@@ -434,7 +434,7 @@ export function layerCreator( L ) {
           options: {
             variant: 'World_Terrain_Base',
             maxZoom: 13,
-            attribution: '{attribution.Esri} &mdash; ' + 'Source: USGS, Esri, TANA, DeLorme, and NPS'
+            attribution: '{attribution.Esri} &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS'
           }
         },
         WorldShadedRelief: {
