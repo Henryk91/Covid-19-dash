@@ -24,24 +24,20 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
           cache: npm
 
       - name: Install
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Build
         run: npm run build
-
-      # React SPA deep-link fallback
-      - name: SPA 404 fallback
-        run: cp build/index.html build/404.html
 
       # Upload the build as the Pages artifact
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build
+          path: public
 
   deploy:
     needs: build

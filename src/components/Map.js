@@ -1,9 +1,19 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { MapContainer, TileLayer, ZoomControl } from 'react-leaflet';
 import { useConfigureLeaflet, useMapServices } from 'hooks';
 import { isDomAvailable } from 'lib/util';
 // import ExpandSvg from './Expand-svg';
+
+let MapContainer;
+let TileLayer;
+let ZoomControl;
+
+if ( typeof window !== 'undefined' ) {
+  const reactLeaflet = require( 'react-leaflet' );
+  MapContainer = reactLeaflet.MapContainer;
+  TileLayer = reactLeaflet.TileLayer;
+  ZoomControl = reactLeaflet.ZoomControl;
+}
 
 const Map = ( props ) => {
   const { children, className, defaultBaseMap, mapEffect, ...rest } = props;
