@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withPrefix } from 'gatsby';
 
 export default function HTML( props ) {
   return (
@@ -8,6 +9,7 @@ export default function HTML( props ) {
         <meta charSet="utf-8" />
         <meta httpEquiv="x-ua-compatible" content="ie=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="icon" href={withPrefix('/favicon.ico')} />
         { props.headComponents }
       </head>
       <body {...props.bodyAttributes}>
