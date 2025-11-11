@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcovid_19_dash=self.webpackChunkcovid_19_dash||[]).push([[771],{5283:function(e,t,l){l.r(t);var a=l(6540),n=l(8154),c=l(802),r=l(5630);t.default=()=>a.createElement(c.A,{pageName:"two"},a.createElement(n.A,null,a.createElement("title",null,"Page Two")),a.createElement(r.A,{type:"content",className:"text-center"},a.createElement("h1",null,"Page Two"),a.createElement("p",null,"Welcome to page 2")))}}]);
+//# sourceMappingURL=component---src-pages-page-2-js-f558f85e8e870d698f8b.js.map
